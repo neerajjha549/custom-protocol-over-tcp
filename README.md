@@ -4,18 +4,17 @@ This project provides a simple yet robust implementation of a multi-threaded TCP
 
 This example is designed to be a clear, well-documented starting point for anyone looking to understand socket programming, custom protocols, and multi-threaded servers.
 
+---
+
 ## Features
 
 -   **Multi-threaded Server:** The server can handle multiple client connections simultaneously, with each client managed in its own thread.
-    
 -   **Custom Binary Protocol:** A simple header-based protocol is used to frame messages, ensuring that complete messages are always processed.
-    
 -   **Clear Separation of Concerns:** The protocol, server logic, and client logic are well-defined and separated.
-    
 -   **Interactive Client:** The client provides a simple command-line interface for interacting with the server.
-    
 -   **Robust Communication:** Helper functions are used to ensure that the exact number of bytes for each part of a message (header and payload) is sent and received, preventing common streaming issues.
-    
+
+---
 
 ## The Custom Protocol
 
@@ -23,78 +22,27 @@ The protocol adds a layer of structure on top of the TCP stream. Every message c
 
 ### Message Structure
 
-**Part**
-
-**Size (bytes)**
-
-**Data Type**
-
-**Description**
-
-**Command**
-
-1 byte
-
-Unsigned Int
-
-A number representing the action to perform.
-
-**Payload Len**
-
-4 bytes
-
-Unsigned Int
-
-The length of the upcoming payload data in bytes.
-
-**Payload**
-
-Variable
-
-String (UTF-8)
-
-The actual data for the command.
+| Part           | Size (bytes) | Data Type      | Description                                          |
+| -------------- | ------------ | -------------- | ---------------------------------------------------- |
+| **Command** | 1 byte       | Unsigned Int   | A number representing the action to perform.         |
+| **Payload Len**| 4 bytes      | Unsigned Int   | The length of the upcoming payload data in bytes.    |
+| **Payload** | Variable     | String (UTF-8) | The actual data for the command.                     |
 
 ### Defined Commands
 
-**Code**
+| Code | Name      | Client Command | Description                                      |
+| :--- | :-------- | :------------- | ------------------------------------------------ |
+| `1`  | `ECHO`    | `echo <msg>`   | Server returns the `<msg>` back to the client.   |
+| `2`  | `REVERSE` | `rev <msg>`    | Server returns a reversed version of `<msg>`.    |
+| `3`  | `QUIT`    | `quit`         | Informs the server that the client is leaving.   |
 
-**Name**
-
-**Client Command**
-
-**Description**
-
-`1`
-
-`ECHO`
-
-`echo <msg>`
-
-Server returns the `<msg>` back to the client.
-
-`2`
-
-`REVERSE`
-
-`rev <msg>`
-
-Server returns a reversed version of `<msg>`.
-
-`3`
-
-`QUIT`
-
-`quit`
-
-Informs the server that the client is leaving.
+---
 
 ## How to Run
 
 ### Prerequisites
 
 -   Python 3.6+
-    
 
 ### 1. Start the Server
 
